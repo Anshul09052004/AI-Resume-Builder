@@ -1,9 +1,20 @@
+import Banner from "../Components/Banner";
+import Features from "../Components/Features";
+import Footer from "../Components/Footer";
+import Hero from "../Components/Hero";
+import Testimonials from "../Components/Testimonials";
+
 function Home() {
     
 
     return (
         <>
-        <h1 className='text-3xl text-violet-900'>AI Powered Resume Builder</h1>
+       <Banner />
+       <Hero/>
+       <Features/>
+        <Testimonials/>
+       <Footer/>
+      
         </>
     );
 }   
