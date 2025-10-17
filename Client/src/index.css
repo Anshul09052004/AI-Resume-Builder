@@ -4,3 +4,9 @@
 * {
   font-family: outfit, sans-serif;
 }
+
+@layer base {
+  button {
+    @apply cursor-pointer;
+  }
+}

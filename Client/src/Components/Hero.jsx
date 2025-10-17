@@ -91,8 +91,15 @@ function Hero() {
         </RouterLink>
 
         {/* Hamburger Button */}
-        <button onClick={openNavbar} className="md:hidden">
-          <MdOutlineMenu className="size-7" />
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden z-50"
+        >
+          {menuOpen ? (
+            <RxCross2 className="text-2xl text-white" />
+          ) : (
+            <MdOutlineMenu className="text-2xl text-white" />
+          )}
         </button>
       </motion.nav>
 
@@ -104,6 +111,7 @@ function Hero() {
           exit={{ opacity: 0 }}
           className="fixed inset-0 bg-black/70 backdrop-blur-lg z-40 flex flex-col items-center justify-center gap-6 text-lg font-medium"
         >
+          {/* Menu Links */}
           <Link
             to="Home"
             smooth={true}
@@ -154,13 +162,6 @@ function Hero() {
               Login
             </motion.button>
           </RouterLink>
-
-          <button
-            onClick={closeNavbar}
-            className="absolute top-5 right-6 text-gray-300 hover:text-white transition"
-          >
-            <RxCross2 className="size-7" />
-          </button>
         </motion.div>
       )}
 
@@ -234,9 +235,17 @@ function Hero() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 border border-gray-600 rounded-full font-medium hover:bg-white/10 transition"
+            className="px-6 py-3 border border-gray-600 rounded-full font-medium hover:bg-white/10 transition hidden md:block"
           >
-            Learn More
+            <Link
+              to="Features"
+              smooth={true}
+              duration={600}
+              offset={-80}
+              className="block cursor-pointer"
+            >
+              Learn More
+            </Link>
           </motion.button>
         </motion.div>
       </motion.div>
