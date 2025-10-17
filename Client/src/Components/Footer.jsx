@@ -4,7 +4,7 @@ import logo from "../assets/logo.svg";
 
 function Footer() {
     return (
-        <footer className="relative bg-gradient-to-b from-gray-900 to-black text-gray-300 py-12 px-6 border-t border-gray-800 overflow-hidden">
+        <footer id="Footer" className="mt-17 relative bg-gradient-to-b from-gray-900 to-black text-gray-300 py-12 px-6 border-t border-gray-800 overflow-hidden">
             {/* Background Glow */}
             <div className="absolute top-10 left-10 w-72 h-72 bg-green-600/20 blur-3xl rounded-full"></div>
             <div className="absolute bottom-10 right-10 w-72 h-72 bg-blue-600/20 blur-3xl rounded-full"></div>

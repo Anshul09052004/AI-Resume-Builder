@@ -25,7 +25,7 @@ const testimonials = [
 
 function Testimonials() {
   return (
-    <section className="bg-gradient-to-b from-black to-gray-900 text-white py-24 px-4 relative overflow-hidden ">
+    <section id="Testimonials" className=" text-white py-24 px-4 relative overflow-hidden ">
       {/* Heading */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}

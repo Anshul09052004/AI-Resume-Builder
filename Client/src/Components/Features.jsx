@@ -31,7 +31,7 @@ const features = [
 
 function Features() {
   return (
-    <section className="bg-gradient-to-b from-black to-gray-900 text-white py-24 px-4 relative overflow-hidden">
+    <section id="Features" className="text-white py-24 px-4 relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-green-600/20 blur-3xl rounded-full"></div>
       <div className="absolute bottom-0 right-10 w-72 h-72 bg-blue-500/20 blur-3xl rounded-full"></div>
