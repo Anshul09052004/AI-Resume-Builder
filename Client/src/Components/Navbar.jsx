@@ -13,8 +13,7 @@ function Navbar() {
       <nav className="max-w-7xl mx-auto px-6 sm:px-10 py-4 flex items-center justify-between">
         {/* Logo */}
         <div
-          onClick={() => navigate("/dashboard")}
-          className="text-3xl font-extrabold text-green-600 dark:text-green-400 cursor-pointer tracking-wide hover:scale-105 transition-transform"
+          className="text-3xl font-extrabold text-green-600 dark:text-green-400 cursor-pointer tracking-wide "
         >
           Resume<span className="text-gray-900 dark:text-white">AI</span>
         </div>

@@ -4,11 +4,13 @@ import { FaArrowRight } from "react-icons/fa6";
 import { MdOutlineMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { Link as RouterLink } from "react-router-dom"; // React Router link for pages
-import { Link } from "react-scroll"; // React Scroll link for smooth scrolling
+import { Link } from "react-scroll";
+import { useNavigate } from "react-router-dom"; // React Scroll link for smooth scrolling
+
 
 function Hero() {
+  const navigate=useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-
   const openNavbar = () => setMenuOpen(true);
   const closeNavbar = () => setMenuOpen(false);
 
@@ -25,10 +27,11 @@ function Hero() {
         className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between w-[90%] max-w-6xl px-6 py-3 border border-gray-700 rounded-full backdrop-blur-md bg-black/40 shadow-lg"
       >
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <h2 className="text-xl font-semibold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
-            ResumeAI
-          </h2>
+        <div
+          onClick={() => navigate("/")}
+          className="text-3xl font-extrabold text-green-600 dark:text-green-400 cursor-pointer tracking-wide"
+        >
+          Resume<span className="text-gray-900 dark:text-white">AI</span>
         </div>
 
         {/* Desktop Menu */}
@@ -228,6 +231,7 @@ function Hero() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate("/app")}
             className="px-6 py-3 bg-green-600 hover:bg-green-700 rounded-full font-medium flex items-center gap-2 transition shadow-md hover:shadow-green-500/40"
           >
             Get Started <FaArrowRight />
