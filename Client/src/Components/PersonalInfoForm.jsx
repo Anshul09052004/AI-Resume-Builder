@@ -10,12 +10,12 @@ function PersonalInfoForm({ data, onChange, removeBackground, setRemoveBackgroun
   };
 
   const fields = [
-    { Key: "fullName", label: "Full Name", icon: FaRegUser, type: "text", required: true },
+    { Key: "full_name", label: "Full Name", icon: FaRegUser, type: "text", required: true },
     { Key: "email", label: "Email Address", icon: HiOutlineMail, type: "email", required: true },
     { Key: "phone", label: "Phone Number", icon: FaPhone, type: "tel", required: true },
     { Key: "location", label: "Location", icon: IoLocationSharp, type: "text", required: true },
-    { Key: "website", label: "Personal Website", icon: BsGlobe, type: "url", required: true },
-    { Key: "linkedin", label: "Linkedin", icon: FaLinkedin, type: "url", required: true },
+    { Key: "website", label: "Personal Website URL", icon: BsGlobe, type: "url", required: true },
+    { Key: "linkedin", label: "Linkedin URL", icon: FaLinkedin, type: "url", required: true },
     { Key: "profession", label: "Profession", icon: FaBriefcase, type: "text", required: true },
   ];
 

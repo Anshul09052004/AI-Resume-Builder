@@ -20,25 +20,28 @@ function ResumePreview({ data, template, accentColor, classes = "" }) {
 
   return (
     <div
-      className={`w-full h-full p-6 bg-gray-100 dark:bg-zinc-900 rounded-3xl shadow-2xl overflow-auto ${classes}`}
+      className={`w-full bg-gray-100 flex justify-center items-start p-4 sm:p-6 md:p-8 overflow-y-auto rounded-2xl ${classes}`}
     >
       <div
         id="resume-preview"
-        className="max-w-5xl mx-auto bg-white dark:bg-zinc-800 rounded-3xl shadow-lg p-8 transition-all duration-300 flex flex-col gap-6"
-        style={{ marginLeft: "1rem", marginRight: "1rem" }} // Left and right margin for spacing
+        className="w-full max-w-[950px] bg-white rounded-2xl shadow-2xl border border-gray-200 
+                   flex flex-col gap-8 p-6 sm:p-8 md:p-12 transition-all duration-300 overflow-hidden"
       >
         {/* Accent color bar */}
         <div
-          className="h-2 w-full rounded-full"
+          className="h-2 w-full rounded-full shadow-sm"
           style={{ backgroundColor: accentColor }}
         ></div>
 
         {/* Template content */}
-        {renderTemplate()}
+        <div className="w-full overflow-x-hidden overflow-y-visible break-words text-gray-800 leading-relaxed text-[0.95rem]">
+          {renderTemplate()}
+        </div>
 
         {/* Footer */}
-        <div className="text-center text-sm text-gray-400 dark:text-gray-500 mt-6">
-          Resume generated with <span className="font-semibold">ResumeBuilder</span>
+        <div className="text-center text-xs text-gray-400 mt-8">
+          Resume generated with{" "}
+          <span className="font-semibold text-gray-500">ResumeAI</span>
         </div>
       </div>
     </div>

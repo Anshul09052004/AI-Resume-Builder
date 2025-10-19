@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa6";
 import { MdOutlineMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
-import { Link as RouterLink } from "react-router-dom"; // React Router link for pages
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { Link } from "react-scroll";
-import { useNavigate } from "react-router-dom"; // React Scroll link for smooth scrolling
-
 
 function Hero() {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-  const openNavbar = () => setMenuOpen(true);
+
+  const toggleNavbar = () => setMenuOpen((prev) => !prev);
   const closeNavbar = () => setMenuOpen(false);
 
   return (
@@ -24,11 +23,14 @@ function Hero() {
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between w-[90%] max-w-6xl px-6 py-3 border border-gray-700 rounded-full backdrop-blur-md bg-black/40 shadow-lg"
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-[1000] flex items-center justify-between w-[90%] max-w-6xl px-6 py-3 border border-gray-700 rounded-full backdrop-blur-md bg-black/40 shadow-lg"
       >
         {/* Logo */}
         <div
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            closeNavbar();
+          }}
           className="text-3xl font-extrabold text-green-600 dark:text-green-400 cursor-pointer tracking-wide"
         >
           Resume<span className="text-gray-900 dark:text-white">AI</span>
@@ -41,48 +43,21 @@ function Hero() {
           transition={{ delay: 0.3 }}
           className="hidden md:flex items-center gap-6 text-gray-300"
         >
-          <Link
-            to="Home"
-            smooth={true}
-            duration={600}
-            offset={-80}
-            className="hover:text-green-400 transition cursor-pointer"
-          >
-            Home
-          </Link>
-
-          <Link
-            to="Features"
-            smooth={true}
-            duration={600}
-            offset={-80}
-            className="hover:text-green-400 transition cursor-pointer"
-          >
-            Features
-          </Link>
-
-          <Link
-            to="Testimonials"
-            smooth={true}
-            duration={600}
-            offset={-80}
-            className="hover:text-green-400 transition cursor-pointer"
-          >
-            Testimonials
-          </Link>
-
-          <Link
-            to="Contact"
-            smooth={true}
-            duration={600}
-            offset={-80}
-            className="hover:text-green-400 transition cursor-pointer"
-          >
-            Contact
-          </Link>
+          {["Home", "Features", "Testimonials", "Contact"].map((item) => (
+            <Link
+              key={item}
+              to={item}
+              smooth={true}
+              duration={600}
+              offset={-80}
+              className="hover:text-green-400 transition cursor-pointer"
+            >
+              {item}
+            </Link>
+          ))}
         </motion.div>
 
-        {/* Login Button */}
+        {/* Login Button (Desktop) */}
         <RouterLink to="/login" className="hidden md:block">
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -94,10 +69,7 @@ function Hero() {
         </RouterLink>
 
         {/* Hamburger Button */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden z-50"
-        >
+        <button onClick={toggleNavbar} className="md:hidden z-[1001]">
           {menuOpen ? (
             <RxCross2 className="text-2xl text-white" />
           ) : (
@@ -107,73 +79,49 @@ function Hero() {
       </motion.nav>
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/70 backdrop-blur-lg z-40 flex flex-col items-center justify-center gap-6 text-lg font-medium"
-        >
-          {/* Menu Links */}
-          <Link
-            to="Home"
-            smooth={true}
-            duration={600}
-            offset={-80}
-            onClick={closeNavbar}
-            className="hover:text-green-400 cursor-pointer"
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-lg z-[999] flex flex-col items-center justify-center gap-8 text-lg font-medium"
           >
-            Home
-          </Link>
-          <Link
-            to="Features"
-            smooth={true}
-            duration={600}
-            offset={-80}
-            onClick={closeNavbar}
-            className="hover:text-green-400 cursor-pointer"
-          >
-            Features
-          </Link>
-          <Link
-            to="Testimonials"
-            smooth={true}
-            duration={600}
-            offset={-80}
-            onClick={closeNavbar}
-            className="hover:text-green-400 cursor-pointer"
-          >
-            Testimonials
-          </Link>
-          <Link
-            to="Contact"
-            smooth={true}
-            duration={600}
-            offset={-80}
-            onClick={closeNavbar}
-            className="hover:text-green-400 cursor-pointer"
-          >
-            Contact
-          </Link>
+            {["Home", "Features", "Testimonials", "Contact"].map((item) => (
+              <Link
+                key={item}
+                to={item}
+                smooth={true}
+                duration={600}
+                offset={-80}
+                onClick={closeNavbar}
+                className="hover:text-green-400 cursor-pointer"
+              >
+                {item}
+              </Link>
+            ))}
 
-          <RouterLink to="/login" onClick={closeNavbar}>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-full font-medium shadow-md hover:shadow-green-500/30 transition"
-            >
-              Login
-            </motion.button>
-          </RouterLink>
-        </motion.div>
-      )}
+            <RouterLink to="/login" onClick={closeNavbar}>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-full font-medium shadow-md hover:shadow-green-500/30 transition"
+              >
+                Login
+              </motion.button>
+            </RouterLink>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* Hero Tagline Section */}
+      {/* Hero Content */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.6 }}
-        className="mt-24 flex flex-col items-center text-center"
+        className="mt-24 flex flex-col items-center text-center z-[1]"
       >
         <motion.div
           whileHover={{ scale: 1.05 }}
@@ -236,6 +184,7 @@ function Hero() {
           >
             Get Started <FaArrowRight />
           </motion.button>
+
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
