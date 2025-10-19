@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { dummyResumeData } from "../assets/assets";
-import {
-  FaArrowLeft,
-  FaUserTie,
-  FaChevronRight,
-  FaChevronLeft,
-} from "react-icons/fa";
+import ProfessionalSummary from "../Components/ProfessionalSummary";
+import ExperienceForm from "../Components/ExperienceForm";
 import PersonalInfoForm from "../Components/PersonalInfoForm";
 import ResumePreview from "../Components/ResumePreview";
 import TemplateSection from "../Components/TemplateSection";
 import ColorPicker from "../Components/ColorPicker";
+
+import { FaArrowLeft, FaUserTie, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
 function ResumeBuilder() {
   const [resumeData, setResumeData] = useState({
@@ -18,8 +16,8 @@ function ResumeBuilder() {
     title: "",
     personal_info: {},
     professional_summary: "",
-    skills: [],
     experience: [],
+    skills: [],
     education: [],
     projects: [],
     template: "classic",
@@ -29,22 +27,16 @@ function ResumeBuilder() {
 
   const { resumeId } = useParams();
   const [removeBackground, setRemoveBackground] = useState(false);
-  const sections = [
-    "personal",
-    "summary",
-    "skills",
-    "experience",
-    "education",
-    "projects",
-  ];
+
+  // Define sections
+  const sections = ["personal", "summary", "skills", "experience", "education", "projects"];
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
+  const activeSection = sections[activeSectionIndex];
 
   useEffect(() => {
     const resume = dummyResumeData.find((r) => r._id === resumeId);
     if (resume) setResumeData(resume);
   }, [resumeId]);
-
-  const activeSection = sections[activeSectionIndex];
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-10">
@@ -68,8 +60,7 @@ function ResumeBuilder() {
               <FaUserTie />
               {activeSection === "personal"
                 ? "Personal Information"
-                : activeSection.charAt(0).toUpperCase() +
-                  activeSection.slice(1)}
+                : activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
             </h2>
 
             {/* Controls */}
@@ -89,10 +80,7 @@ function ResumeBuilder() {
                     <ColorPicker
                       selectedColor={resumeData.accent_color}
                       onChange={(color) =>
-                        setResumeData((prev) => ({
-                          ...prev,
-                          accent_color: color,
-                        }))
+                        setResumeData((prev) => ({ ...prev, accent_color: color }))
                       }
                     />
                   </div>
@@ -101,7 +89,6 @@ function ResumeBuilder() {
 
               {/* Bottom: Previous + Next Buttons */}
               <div className="flex justify-between items-center mt-2">
-                {/* Previous Button */}
                 {activeSectionIndex > 0 ? (
                   <button
                     onClick={() => setActiveSectionIndex((prev) => prev - 1)}
@@ -110,10 +97,9 @@ function ResumeBuilder() {
                     <FaChevronLeft /> Previous
                   </button>
                 ) : (
-                  <div className="w-[100px]" /> // Placeholder for balance
+                  <div className="w-[100px]" />
                 )}
 
-                {/* Next Button */}
                 {activeSectionIndex < sections.length - 1 ? (
                   <button
                     onClick={() => setActiveSectionIndex((prev) => prev + 1)}
@@ -122,35 +108,53 @@ function ResumeBuilder() {
                     Next <FaChevronRight />
                   </button>
                 ) : (
-                  <div className="w-[100px]" /> // Placeholder for symmetry
+                  <div className="w-[100px]" />
                 )}
               </div>
             </div>
 
             {/* Active Form Section */}
-            <div className="mt-4">
-              {activeSection === "personal" ? (
+            <div className="mt-4 space-y-5">
+              {activeSection === "personal" && (
                 <PersonalInfoForm
                   data={resumeData.personal_info}
                   onChange={(field, value) =>
                     setResumeData((prev) => ({
                       ...prev,
-                      personal_info: {
-                        ...prev.personal_info,
-                        [field]: value,
-                      },
+                      personal_info: { ...prev.personal_info, [field]: value },
                     }))
                   }
                   removeBackground={removeBackground}
                   setRemoveBackground={setRemoveBackground}
                 />
-              ) : (
-                <p className="text-gray-500 mt-4 italic">
-                  Form for{" "}
-                  <span className="font-medium">{activeSection}</span> will
-                  appear here.
-                </p>
               )}
+
+              {activeSection === "summary" && (
+                <ProfessionalSummary
+                  data={resumeData.professional_summary}
+                  onChange={(data) =>
+                    setResumeData((prev) => ({ ...prev, professional_summary: data }))
+                  }
+                />
+              )}
+
+              {activeSection === "experience" && (
+                <ExperienceForm
+                  data={resumeData.experience}
+                  onChange={(data) => setResumeData((prev) => ({ ...prev, experience: data }))}
+                />
+              )}
+
+              {/* Add other sections similarly */}
+              {/* {activeSection === "skills" && (
+                <p className="text-gray-500 italic">Skills form goes here</p>
+              )}
+              {activeSection === "education" && (
+                <p className="text-gray-500 italic">Education form goes here</p>
+              )}
+              {activeSection === "projects" && (
+                <p className="text-gray-500 italic">Projects form goes here</p>
+              )} */}
             </div>
           </div>
         </div>
