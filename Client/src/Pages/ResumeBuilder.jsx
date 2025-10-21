@@ -7,6 +7,11 @@ import PersonalInfoForm from "../Components/PersonalInfoForm";
 import ResumePreview from "../Components/ResumePreview";
 import TemplateSection from "../Components/TemplateSection";
 import ColorPicker from "../Components/ColorPicker";
+import EducationForm from "../Components/EducationForm";
+import ProjectForm from "../Components/ProjectForm";
+import SkillsForm from "../Components/SkillsForm";
+
+
 
 import { FaArrowLeft, FaUserTie, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
@@ -19,7 +24,7 @@ function ResumeBuilder() {
     experience: [],
     skills: [],
     education: [],
-    projects: [],
+    project: [],
     template: "classic",
     accent_color: "#3b82F6",
     public: false,
@@ -145,17 +150,32 @@ function ResumeBuilder() {
                 />
               )}
 
-              {/* Add other sections similarly */}
-              {/* {activeSection === "skills" && (
-                <p className="text-gray-500 italic">Skills form goes here</p>
-              )}
               {activeSection === "education" && (
-                <p className="text-gray-500 italic">Education form goes here</p>
+                <EducationForm
+                  data={resumeData.education}
+                  onChange={(data) => setResumeData((prev) => ({ ...prev, education: data }))}
+                />
               )}
+
               {activeSection === "projects" && (
-                <p className="text-gray-500 italic">Projects form goes here</p>
-              )} */}
+                <ProjectForm
+                  data={resumeData.project}
+                  onChange={(data) => setResumeData((prev) => ({ ...prev, project: data }))}
+                />
+              )}
+
+              {activeSection === "skills" && (
+                <SkillsForm
+                  data={resumeData.skills}
+                  onChange={(data) => setResumeData((prev) => ({ ...prev, skills: data }))}
+                />
+              )}
+
             </div>
+   <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition duration-300 ease-in-out">
+  Save Changes
+</button>
+
           </div>
         </div>
 
