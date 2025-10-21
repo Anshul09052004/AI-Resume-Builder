@@ -10,9 +10,6 @@ import ColorPicker from "../Components/ColorPicker";
 import EducationForm from "../Components/EducationForm";
 import ProjectForm from "../Components/ProjectForm";
 import SkillsForm from "../Components/SkillsForm";
-
-
-
 import { FaArrowLeft, FaUserTie, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
 function ResumeBuilder() {
@@ -33,7 +30,7 @@ function ResumeBuilder() {
   const { resumeId } = useParams();
   const [removeBackground, setRemoveBackground] = useState(false);
 
-  // Define sections
+  // Sections
   const sections = ["personal", "summary", "skills", "experience", "education", "projects"];
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
   const activeSection = sections[activeSectionIndex];
@@ -170,23 +167,40 @@ function ResumeBuilder() {
                   onChange={(data) => setResumeData((prev) => ({ ...prev, skills: data }))}
                 />
               )}
-
             </div>
-   <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition duration-300 ease-in-out">
-  Save Changes
-</button>
 
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition duration-300 ease-in-out">
+              Save Changes
+            </button>
           </div>
         </div>
 
         {/* Right: Live Preview */}
-        <div className="bg-gray-50 rounded-3xl shadow-inner p-4 sm:p-6 md:p-8 flex items-start justify-center overflow-auto">
-          <ResumePreview
-            data={resumeData}
-            template={resumeData.template}
-            accentColor={resumeData.accent_color}
-            classes="w-full max-w-[950px] mx-auto"
-          />
+        <div className="
+          bg-gray-50 
+          rounded-3xl 
+          shadow-xl 
+          p-4 sm:p-6 md:p-8 
+          flex justify-center items-start 
+          w-full 
+          overflow-auto 
+          h-[70vh] sm:h-[calc(100vh-120px)]
+          transition-all duration-300 ease-in-out
+          "
+        >
+          <div className="w-full max-w-[950px] mx-auto
+              bg-white rounded-2xl shadow-lg
+              p-6 sm:p-8
+              border border-gray-200
+              overflow-hidden
+              ">
+            <ResumePreview
+              data={resumeData}
+              template={resumeData.template}
+              accentColor={resumeData.accent_color}
+              classes="w-full"
+            />
+          </div>
         </div>
       </div>
     </div>
