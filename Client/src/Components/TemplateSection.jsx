@@ -61,11 +61,10 @@ function TemplateSection({ selectedTemplate, onChange }) {
                 onChange(template.id);
                 setIsOpen(false);
               }}
-              className={`p-4 cursor-pointer flex justify-between items-center hover:bg-gray-100 transition-all ${
-                selectedTemplate === template.id
-                  ? "bg-green-600 text-white"
-                  : "bg-white text-gray-800"
-              }`}
+              className={`p-4 cursor-pointer flex justify-between items-center hover:bg-gray-100 transition-all ${selectedTemplate === template.id
+                ? "bg-green-600 text-white"
+                : "bg-white text-gray-800"
+                }`}
             >
               <div>
                 <p className="font-semibold">{template.name}</p>
