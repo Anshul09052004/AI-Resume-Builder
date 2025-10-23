@@ -10,7 +10,7 @@ import SkillsForm from "../Components/SkillsForm";
 import TemplateSection from "../Components/TemplateSection";
 import ColorPicker from "../Components/ColorPicker";
 import ResumePreview from "../Components/ResumePreview";
-import SharePopup from "../Components/SharePopup";
+
 
 import { FaArrowLeft, FaUserTie, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { IoShareSocial } from "react-icons/io5";
@@ -279,11 +279,7 @@ const downloadResume = () => {
       </div>
 
       {/* Share Popup */}
-      <SharePopup
-        visible={showSharePopup}
-        onClose={() => setShowSharePopup(false)}
-        shareUrl={`${window.location.origin}/view/${resumeId}`}
-      />
+     
     </div>
   );
 }
