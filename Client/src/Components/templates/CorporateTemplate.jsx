@@ -69,7 +69,7 @@ const CorporateTemplate = ({ data, accentColor = "#1f2937" }) => {
               <h3 className="text-lg font-semibold">Key Skills</h3>
               <div className="mt-3 flex flex-wrap gap-2">
                 {data.skills.map((s, i) => (
-                  <span key={i} className="px-3 py-1 text-sm rounded" style={{ backgroundColor: accentColor, color: "#fff" }}>{s}</span>
+                  <span key={i} className="px-3 py-1 text-sm rounded" style={{ backgroundColor: accentColor, color: "black" }}>{s}</span>
                 ))}
               </div>
             </div>

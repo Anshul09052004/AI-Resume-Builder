@@ -47,47 +47,57 @@ function ResumeBuilder() {
     setResumeData((prev) => ({ ...prev, public: !prev.public }));
   };
 
- const downloadResume = () => {
+const downloadResume = () => {
   const resumeElement = document.getElementById("resume-preview");
-
   if (!resumeElement) return;
 
-  // Open new window
-  const printWindow = window.open("", "_blank", "width=900,height=1200");
-  printWindow.document.write(`
+  const printContents = resumeElement.innerHTML;
+  const accentColor = resumeData.accent_color;
+
+  // Save current body
+  const originalContents = document.body.innerHTML;
+
+  // Replace body content temporarily
+  document.body.innerHTML = `
     <html>
       <head>
-        <title>Print Resume</title>
+        <title>${resumeData.title || "My Resume"}</title>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
         <style>
-          body { font-family: sans-serif; padding: 20px; background: #f9fafb; }
-          .resume-container { width: 100%; max-width: 950px; margin: auto; }
+          body {
+            font-family: system-ui, sans-serif;
+            background: #fff;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+          }
+
+          /* Accent color styles */
+          [data-accent] { color: ${accentColor} !important; }
+          [data-border-accent] { border-color: ${accentColor} !important; }
+          [data-bg-accent] { background-color: ${accentColor} !important; }
+
+          /* Force black text for personal info & skills */
+          [data-accent], [data-border-accent], [data-bg-accent] {
+            color: #000 !important; /* text black */
+          }
         </style>
       </head>
       <body>
-        <div id="print-root" class="resume-container"></div>
+        <div class="resume-container" style="max-width:950px; width:100%; background:white; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.08); overflow:hidden;">
+          ${printContents}
+        </div>
       </body>
     </html>
-  `);
-  printWindow.document.close();
+  `;
 
-  // Create a clone of React component with template and accentColor applied
-  const container = printWindow.document.getElementById("print-root");
+  window.print();
 
-  const clonedResume = resumeElement.cloneNode(true);
-
-  // Optional: accent color fix
-  const accentElements = clonedResume.querySelectorAll("[data-accent]");
-  accentElements.forEach((el) => {
-    el.style.color = resumeData.accent_color;
-  });
-
-  container.appendChild(clonedResume);
-
-  printWindow.focus();
-  printWindow.print();
-  printWindow.close();
+  // Restore old content
+  document.body.innerHTML = originalContents;
+  window.location.reload();
 };
+
 
 
   const handleShare = async () => {
