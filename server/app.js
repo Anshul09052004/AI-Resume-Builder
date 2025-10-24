@@ -3,6 +3,7 @@ import connectDb from './Db/index.js';
 import cors from 'cors';
 import userRouter from './Routes/User.Route.js';
 import resumeRouter from './Routes/Resume.Route.js';
+import aiRouter from './Routes/Ai.Routes.js';
 
 const app = express();
 connectDb();
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 });
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/resumes', resumeRouter)
+app.use('/api/v1/ai', aiRouter)
 
 
 export default app;
