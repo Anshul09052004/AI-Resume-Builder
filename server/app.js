@@ -1,6 +1,8 @@
 import express from 'express';
 import connectDb from './Db/index.js';
 import cors from 'cors';
+import userRouter from './Routes/User.Route.js';
+import resumeRouter from './Routes/Resume.Route.js';
 
 const app = express();
 connectDb();
@@ -14,12 +16,13 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
-
-
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.send("server running successfully");
 });
+app.use('/api/v1/user', userRouter)
+app.use('/api/v1/resumes', resumeRouter)
+
 
 export default app;
