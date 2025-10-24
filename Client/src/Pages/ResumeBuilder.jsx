@@ -266,7 +266,7 @@ const downloadResume = () => {
             id="resume-preview"
             className="bg-gray-50 rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 flex justify-center items-start w-full overflow-auto h-[70vh] sm:h-[calc(100vh-120px)] transition-all duration-300 ease-in-out"
           >
-            <div className="w-full max-w-[950px] mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-200 overflow-hidden">
+            <div className="w-full max-w-[950px] mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-8 border border-white overflow-hidden">
               <ResumePreview
                 data={resumeData}
                 template={resumeData.template}
@@ -277,8 +277,6 @@ const downloadResume = () => {
           </div>
         </div>
       </div>
-
-      {/* Share Popup */}
      
     </div>
   );

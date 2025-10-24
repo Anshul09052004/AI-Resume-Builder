@@ -44,29 +44,33 @@ function ResumePreview({ data, template, accentColor, classes = "" }) {
 
   return (
     <div
-      className={`w-full bg-gray-100 flex justify-center items-start p-4 sm:p-6 md:p-8 overflow-y-auto rounded-2xl ${classes}`}
+      className={`w-full flex justify-center items-start py-2 overflow-y-auto ${classes}`}
+      style={{ backgroundColor: "#f4f6f8" }}
     >
       <div
         id="resume-preview"
-        className="w-full max-w-[950px] bg-white rounded-2xl shadow-2xl border border-gray-200 
-                   flex flex-col gap-8 p-6 sm:p-8 md:p-12 transition-all duration-300 overflow-hidden"
+        className="w-full max-w-[794px] h-[1123px] bg-white rounded-md border border-gray-300 
+                   shadow-sm flex flex-col gap-2 p-4 sm:p-5 
+                   transition-all duration-300 overflow-hidden print:h-auto"
+        style={{
+          transform: "scale(0.88)",
+          transformOrigin: "top center",
+          lineHeight: "1.2",
+        }}
       >
         {/* Accent color bar */}
         <div
-          className="h-2 w-full rounded-full shadow-sm"
+          className="h-[3px] w-full rounded-md mb-1"
           style={{ backgroundColor: accentColor }}
         ></div>
 
         {/* Template content */}
-        <div className="w-full overflow-x-hidden overflow-y-visible break-words text-gray-800 leading-relaxed text-[0.95rem]">
+        <div className="w-full overflow-hidden text-gray-900 text-[0.85rem] leading-snug tracking-tight">
           {renderTemplate()}
         </div>
 
-        {/* Footer */}
-        <div className="text-center text-xs text-gray-400 mt-8">
-          Resume generated with{" "}
-          <span className="font-semibold text-gray-500">ResumeAI</span>
-        </div>
+      
+       
       </div>
     </div>
   );

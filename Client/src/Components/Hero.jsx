@@ -188,7 +188,7 @@ function Hero() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 border border-gray-600 rounded-full font-medium hover:bg-white/10 transition hidden md:block"
+            className="px-6 py-3 border border-gray-600 rounded-full font-medium hover:bg-white/10 transition  md:block"
           >
             <Link
               to="Features"
