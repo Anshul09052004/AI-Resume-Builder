@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logout } from "../App/Features/authSlice";
 
 function Navbar() {
   const navigate = useNavigate();
-  const user = { name: "John Doe" };
+  const { user } = useSelector(state => state.auth)
+  const dispatch = useDispatch();
 
   const logoutUser = () => {
     navigate("/");
+    dispatch(logout());
   };
 
   return (
@@ -23,8 +28,9 @@ function Navbar() {
           <p className="text-gray-700 dark:text-gray-200 text-sm sm:text-base font-medium">
             Hi,{" "}
             <span className="text-green-600 dark:text-green-400 font-semibold">
-              {user.name}
+              {user?.name || "Guest"}
             </span>
+
           </p>
           <button
             onClick={logoutUser}

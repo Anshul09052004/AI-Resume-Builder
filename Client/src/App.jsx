@@ -1,4 +1,3 @@
-import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './Pages/Home.jsx'
 import Layout from './Pages/Layout.jsx'
@@ -6,12 +5,12 @@ import Login from './Pages/Login.jsx'
 import Dashboard from './Pages/Dashboard.jsx'
 import ResumeBuilder from './Pages/ResumeBuilder.jsx'
 import Preview from './Pages/Preview.jsx'
-
+import { Toaster } from 'react-hot-toast'
 
 function App() {
-
   return (
     <>
+      <Toaster />
       <Routes>
         <Route path='/' element={<Home />} />
 

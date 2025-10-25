@@ -5,9 +5,11 @@ import { MdOutlineMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { Link } from "react-scroll";
+import { useSelector } from "react-redux";
 
 function Hero() {
   const navigate = useNavigate();
+  const { user } = useSelector(state => state.auth)
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleNavbar = () => setMenuOpen((prev) => !prev);
@@ -62,11 +64,14 @@ function Hero() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            hidden={user}
             className="bg-green-600 hover:bg-green-700 px-5 py-2 rounded-full font-medium shadow-md hover:shadow-green-500/30 transition"
           >
             Login
           </motion.button>
         </RouterLink>
+
+
 
         {/* Hamburger Button */}
         <button onClick={toggleNavbar} className="md:hidden z-[1001]">
@@ -179,7 +184,13 @@ function Hero() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate("/app")}
+            onClick={() => {
+              if (user) {
+                navigate("/app");
+              } else {
+                navigate("/login");
+              }
+            }}
             className="px-6 py-3 bg-green-600 hover:bg-green-700 rounded-full font-medium flex items-center gap-2 transition shadow-md hover:shadow-green-500/40"
           >
             Get Started <FaArrowRight />
