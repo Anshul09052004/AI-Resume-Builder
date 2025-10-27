@@ -24,7 +24,9 @@ function ProjectForm({ data, onChange }) {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h3 className="text-2xl font-bold text-gray-800">Projects</h3>
+          <h3 className="text-3xl font-extrabold bg-gradient-to-r from-indigo-500 to-blue-600 bg-clip-text text-transparent">
+            Projects
+          </h3>
           <p className="text-sm text-gray-500 mt-1">
             Add your projects to showcase your experience
           </p>
@@ -32,7 +34,7 @@ function ProjectForm({ data, onChange }) {
         <button
           onClick={addProject}
           type="button"
-          className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-indigo-600 hover:to-blue-600 text-white px-5 py-2.5 rounded-xl shadow-md font-medium transition-all"
+          className="flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-blue-600 hover:to-indigo-500 text-white px-5 py-2.5 rounded-xl shadow-md font-medium transition-all duration-300 hover:scale-105 active:scale-95"
         >
           <CiCirclePlus className="w-5 h-5" />
           Add Project
@@ -42,8 +44,8 @@ function ProjectForm({ data, onChange }) {
       {/* Empty State */}
       {data.length === 0 && (
         <div className="flex flex-col items-center justify-center text-gray-500 mt-6 gap-3">
-          <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
-            <CiCirclePlus className="w-6 h-6 text-gray-400" />
+          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-100 to-blue-100 flex items-center justify-center shadow-inner">
+            <CiCirclePlus className="w-6 h-6 text-indigo-400" />
           </div>
           <p className="font-medium text-center">No projects added yet.</p>
           <p className="text-sm text-center">
@@ -56,12 +58,12 @@ function ProjectForm({ data, onChange }) {
       {data.map((project, index) => (
         <div
           key={index}
-          className="border border-gray-300 rounded-xl p-5 space-y-5 bg-white shadow-sm hover:shadow-md transition-all"
+          className="border border-gray-200 rounded-xl p-5 space-y-5 bg-white shadow-sm hover:shadow-lg hover:border-indigo-300 transition-all duration-300"
         >
           {/* Title + Remove */}
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center border-b pb-2">
             <h4 className="font-semibold text-gray-700">
-              Project #{index + 1}
+              💼 Project #{index + 1}
             </h4>
             <button
               onClick={() => removeProject(index)}
@@ -86,7 +88,7 @@ function ProjectForm({ data, onChange }) {
                 );
                 updateProject(index, "name", capitalized);
               }}
-              className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 capitalize placeholder-gray-400"
+              className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 capitalize placeholder-gray-400"
             />
 
             {/* Project Type */}
@@ -101,7 +103,7 @@ function ProjectForm({ data, onChange }) {
                 );
                 updateProject(index, "type", capitalized);
               }}
-              className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 capitalize placeholder-gray-400"
+              className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 capitalize placeholder-gray-400"
             />
           </div>
 
@@ -111,7 +113,7 @@ function ProjectForm({ data, onChange }) {
             placeholder="Describe your project — tools used, features, and outcomes"
             value={project.description || ""}
             onChange={(e) => updateProject(index, "description", e.target.value)}
-            className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none placeholder-gray-400"
+            className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 resize-none placeholder-gray-400"
           />
         </div>
       ))}

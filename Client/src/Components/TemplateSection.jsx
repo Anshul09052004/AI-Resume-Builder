@@ -11,7 +11,6 @@ function TemplateSection({ selectedTemplate, onChange }) {
     { id: "classic", name: "Classic", description: "A simple and clean resume template." },
     { id: "modern", name: "Modern", description: "A sleek and modern resume template." },
     { id: "minimal", name: "Minimal", description: "A minimalistic resume template." },
-    { id: "minimal-image", name: "Minimal with Image", description: "Minimal template with profile image." },
     { id: "corporate", name: "Corporate", description: "Professional corporate resume." },
     { id: "creative", name: "Creative", description: "Creative design focused template." },
     { id: "eligent", name: "Eligent", description: "Elegent template." },

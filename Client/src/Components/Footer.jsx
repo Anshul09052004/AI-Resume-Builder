@@ -1,6 +1,4 @@
-import React from "react";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub } from "react-icons/fa";
-import logo from "../assets/logo.svg";
 
 function Footer() {
     return (

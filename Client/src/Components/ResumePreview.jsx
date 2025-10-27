@@ -1,7 +1,6 @@
 import React from "react";
 import ModernTemplate from "./templates/ModernTemplate";
 import ClassicTemplate from "./templates/ClassicTemplate";
-import MinimalImageTemplate from "./templates/MinimalImageTemplate";
 import MinimalTemplate from "./templates/MinimalTemplate";
 import CorporateTemplate from "./templates/CorporateTemplate";
 import CreativeTemplate from "./templates/CreativeTemplate";
@@ -35,8 +34,6 @@ function ResumePreview({ data, template, accentColor, classes = "" }) {
         return <TechTemplate data={data} accentColor={accentColor} />;
       case "time-line":
         return <TimeLineTemplate data={data} accentColor={accentColor} />;
-      case "minimal-image":
-        return <MinimalImageTemplate data={data} accentColor={accentColor} />;
       default:
         return <ClassicTemplate data={data} accentColor={accentColor} />;
     }
