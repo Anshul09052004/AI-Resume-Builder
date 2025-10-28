@@ -1,10 +1,6 @@
 import Resume from "../Models/Resume.Model.js";
 const createResume = async (req, res) => {
   try {
-    console.log("✅ createResume hit");
-    console.log("User ID:", req.userId);
-    console.log("Body:", req.body);
-
     const userId = req.userId;
     const { title } = req.body;
 
@@ -50,7 +46,7 @@ const getPublicResumeById = async (req, res) => {
   try {
     const { resumeId } = req.params;
 
-    const resume = await Resume.findOne({ public: true, _id: resumeId });
+    const resume = await Resume.findOne({ _id: resumeId });
     if (!resume) {
       return res.status(404).json({ error: "Resume not found" });
     }
@@ -63,7 +59,7 @@ const getPublicResumeById = async (req, res) => {
   }
 };
 
- const updateResume = async (req, res) => {
+const updateResume = async (req, res) => {
   try {
     const { resumeId } = req.params;
     const { resumeData } = req.body;

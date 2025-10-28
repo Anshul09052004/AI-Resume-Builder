@@ -10,10 +10,6 @@ const ResumeSchema = new mongoose.Schema({
         type: String,
         default: "Untitled Resume"
     },
-    public: {
-        type: Boolean,
-        default: false
-    },
     template: {
         type: String,
         default: "classic"
