@@ -171,7 +171,7 @@ function ResumeBuilder() {
     `;
     window.print();
     document.body.innerHTML = originalContents;
-    window.location.reload();
+  window.location.href = "/"; 
   };
 
   // ✅ Share resume
