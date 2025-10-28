@@ -135,52 +135,44 @@ function ResumeBuilder() {
 
 
   // ✅ Download as PDF
- const downloadResume = () => {
-  if (!resumeData) return;
-  const resumeElement = document.getElementById("resume-preview");
-  if (!resumeElement) return;
+  const downloadResume = () => {
+    if (!resumeData) return;
+    const resumeElement = document.getElementById("resume-preview");
+    if (!resumeElement) return;
 
-  const printContents = resumeElement.innerHTML;
-  const accentColor = resumeData.accent_color || "#3b82F6";
-  const originalContents = document.body.innerHTML;
+    const printContents = resumeElement.innerHTML;
+    const accentColor = resumeData.accent_color || "#3b82F6";
+    const originalContents = document.body.innerHTML;
 
-  document.body.innerHTML = `
-    <html>
-      <head>
-        <title>${resumeData.title || "My Resume"}</title>
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
-        <style>
-          body {
-            font-family: system-ui, sans-serif;
-            background: #fff;
-            padding: 40px;
-            display: flex;
-            justify-content: center;
-          }
-          [data-accent] { color: ${accentColor} !important; }
-          [data-border-accent] { border-color: ${accentColor} !important; }
-          [data-bg-accent] { background-color: ${accentColor} !important; }
-        </style>
-      </head>
-      <body>
-        <div style="max-width:950px; width:100%; background:white; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.08); overflow:hidden;">
-          ${printContents}
-        </div>
-      </body>
-    </html>
-  `;
-
-  window.print();
-
-  setTimeout(() => {
-    // restore original page content
+    document.body.innerHTML = `
+      <html>
+        <head>
+          <title>${resumeData.title || "My Resume"}</title>
+          <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+          <style>
+            body {
+              font-family: system-ui, sans-serif;
+              background: #fff;
+              padding: 40px;
+              display: flex;
+              justify-content: center;
+            }
+            [data-accent] { color: ${accentColor} !important; }
+            [data-border-accent] { border-color: ${accentColor} !important; }
+            [data-bg-accent] { background-color: ${accentColor} !important; }
+          </style>
+        </head>
+        <body>
+          <div style="max-width:950px; width:100%; background:white; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.08); overflow:hidden;">
+            ${printContents}
+          </div>
+        </body>
+      </html>
+    `;
+    window.print();
     document.body.innerHTML = originalContents;
-
-    // stay on the same route (no reload, no 404)
-    const currentUrl = window.location.href;
-    window.history.pushState({}, "", currentUrl);
-  }, 100);
-};
+  window.location.href = "/app/resumes/"+resumeId; // Redirect back to resume builder
+  };
 
   // ✅ Share resume
   const handleShare = async () => {
