@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import api from "../Config/Api";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
 import {
   FaArrowLeft,
   FaUserTie,
@@ -135,53 +134,45 @@ function ResumeBuilder() {
   };
 
 
-  
+  // ✅ Download as PDF
+  const downloadResume = () => {
+    if (!resumeData) return;
+    const resumeElement = document.getElementById("resume-preview");
+    if (!resumeElement) return;
 
-const downloadResume = (resumeId, resumeData) => {
-  if (!resumeData) return;
+    const printContents = resumeElement.innerHTML;
+    const accentColor = resumeData.accent_color || "#3b82F6";
+    const originalContents = document.body.innerHTML;
 
-  const resumeElement = document.getElementById("resume-preview");
-  if (!resumeElement) return;
-
-  const printWindow = window.open("", "_blank");
-  const accentColor = resumeData.accent_color || "#3b82F6";
-
-  printWindow.document.write(`
-    <html>
-      <head>
-        <title>${resumeData.title || "My Resume"}</title>
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
-        <style>
-          body {
-            font-family: system-ui, sans-serif;
-            background: #fff;
-            padding: 40px;
-            display: flex;
-            justify-content: center;
-          }
-          [data-accent] { color: ${accentColor} !important; }
-          [data-border-accent] { border-color: ${accentColor} !important; }
-          [data-bg-accent] { background-color: ${accentColor} !important; }
-        </style>
-      </head>
-      <body>
-        <div style="max-width:950px; width:100%; background:white; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.08); overflow:hidden;">
-          ${resumeElement.innerHTML}
-        </div>
-      </body>
-    </html>
-  `);
-
-  printWindow.document.close();
-  printWindow.focus();
-  printWindow.print();
-  printWindow.close();
-
-  // React-safe navigation (no full reload)
-  const navigate = useNavigate();
-  navigate(`/app/builder/${resumeId}`);
-};
-
+    document.body.innerHTML = `
+      <html>
+        <head>
+          <title>${resumeData.title || "My Resume"}</title>
+          <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+          <style>
+            body {
+              font-family: system-ui, sans-serif;
+              background: #fff;
+              padding: 40px;
+              display: flex;
+              justify-content: center;
+            }
+            [data-accent] { color: ${accentColor} !important; }
+            [data-border-accent] { border-color: ${accentColor} !important; }
+            [data-bg-accent] { background-color: ${accentColor} !important; }
+          </style>
+        </head>
+        <body>
+          <div style="max-width:950px; width:100%; background:white; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.08); overflow:hidden;">
+            ${printContents}
+          </div>
+        </body>
+      </html>
+    `;
+    window.print();
+    document.body.innerHTML = originalContents;
+    window.location.href = "/app";
+  };
 
   // ✅ Share resume
   const handleShare = async () => {
