@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { dummyResumeData } from "../assets/assets";
 import ResumePreview from "../Components/ResumePreview";
-import Loader from "../Components/Loader"; 
+import Loader from "../Components/Loader";
 import { GoArrowLeft } from "react-icons/go";
+import Api from "../Config/Api.js"
 
 
 function Preview() {
@@ -12,8 +13,13 @@ function Preview() {
     const [isLoading, setIsLoading] = useState(true);
 
     const loadResume = async () => {
-        const foundResume = dummyResumeData.find((resume) => resume._id === resumeId);
-        setResumeData(foundResume || null);
+        try {
+            const { data } = await Api.get('/api/v1/resumes/public/' + resumeId);
+            setResumeData(data);
+
+        } catch (error) {
+            console.error("Error fetching resume:", error);
+        }
         setIsLoading(false);
     };
 

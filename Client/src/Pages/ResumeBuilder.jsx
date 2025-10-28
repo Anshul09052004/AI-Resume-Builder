@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import api from "../Config/Api";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import axios from "axios";
 import {
   FaArrowLeft,
   FaUserTie,
@@ -45,7 +44,7 @@ function ResumeBuilder() {
   const activeSection = sections[activeSectionIndex];
 
   // ✅ Fetch resume data
-   useEffect(() => {
+  useEffect(() => {
     const fetchResume = async () => {
       try {
         const { data } = await api.get(`/api/v1/resumes/get/${resumeId}`, {
@@ -111,34 +110,29 @@ function ResumeBuilder() {
     }
   };
   const saveResume = async () => {
-  if (!resumeId) {
-    toast.error("No resume found to update.");
-    return;
-  }
+    if (!resumeId) {
+      toast.error("No resume found to update.");
+      return;
+    }
 
-  setLoading(true);
-  try {
-    const { data } = await api.put(
-      `/api/v1/resumes/update/${resumeId}`,
-      { resumeData },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    setLoading(true);
+    try {
+      const { data } = await api.put(
+        `/api/v1/resumes/update/${resumeId}`,
+        { resumeData },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    setResumeData(data.resume);
-    toast.success("✅ Resume saved successfully!");
-  } catch (err) {
-    console.error("❌ Error saving resume:", err);
-    toast.error(err.response?.data?.message || "Failed to save resume");
-  } finally {
-    setLoading(false);
-  }
-};
-
-
-  // ✅ Change visibility
-  const changeResumeVisibility = () => {
-    setResumeData((prev) => ({ ...prev, public: !prev.public }));
+      setResumeData(data.resume);
+      toast.success("✅ Resume saved successfully!");
+    } catch (err) {
+      console.error("❌ Error saving resume:", err);
+      toast.error(err.response?.data?.message || "Failed to save resume");
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   // ✅ Download as PDF
   const downloadResume = () => {
@@ -303,7 +297,7 @@ function ResumeBuilder() {
             {activeSection === "summary" && (
               <ProfessionalSummary
                 data={resumeData.professional_summary}
-                  setResumeData={setResumeData}
+                setResumeData={setResumeData}
                 onChange={(data) =>
                   setResumeData((prev) => ({
                     ...prev,
@@ -351,8 +345,8 @@ function ResumeBuilder() {
             onClick={saveResume}
             disabled={loading}
             className={`${loading
-                ? "bg-blue-400 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700"
+              ? "bg-blue-400 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700"
               } text-white font-semibold px-5 py-2 rounded-lg shadow-md transition duration-300 ease-in-out flex items-center justify-center`}
           >
             {loading ? (
@@ -369,21 +363,13 @@ function ResumeBuilder() {
         {/* Right Preview Section */}
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap justify-end gap-2">
-            {resumeData.public && (
-              <button
-                onClick={handleShare}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
-              >
-                <IoShareSocial /> Share
-              </button>
-            )}
             <button
-              onClick={changeResumeVisibility}
-              className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition"
+              onClick={handleShare}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
             >
-              {resumeData.public ? <GoEye /> : <GoEyeClosed />}
-              {resumeData.public ? "Public" : "Private"}
+              <IoShareSocial /> Share
             </button>
+
             <button
               onClick={downloadResume}
               className="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition"
@@ -391,6 +377,7 @@ function ResumeBuilder() {
               <GoDownload /> Download
             </button>
           </div>
+
 
           <div
             id="resume-preview"
