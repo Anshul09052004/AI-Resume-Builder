@@ -171,7 +171,9 @@ function ResumeBuilder() {
     `;
     window.print();
     document.body.innerHTML = originalContents;
-  window.location.href = "/app/resumes/"+resumeId; // Redirect back to resume builder
+    window.location.href = "/app/resumes/" + resumeId;
+    // Redirect back to resume builder
+    window.location.reload();
   };
 
   // ✅ Share resume
