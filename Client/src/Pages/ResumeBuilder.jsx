@@ -167,11 +167,14 @@ function ResumeBuilder() {
             ${printContents}
           </div>
         </body>
+
       </html>
     `;
     window.print();
     document.body.innerHTML = originalContents;
-    window.location.href = "/app";
+    window.location.reload();
+    
+
   };
 
   // ✅ Share resume
