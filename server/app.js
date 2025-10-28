@@ -12,7 +12,7 @@ app.set('trust proxy', 1);
 app.use(express.json());
 app.use(cors({
   origin: [
-    "ai-resume-builder-66fo.vercel.app"
+    "https://ai-resume-builder-66fo.vercel.app/"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
