@@ -140,7 +140,7 @@ function ResumeBuilder() {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobile) {
       toast.error(
-        " Download not available on mobile! Please open this page on your desktop or laptop to download your resume.",
+        "Sorry, download feature is not available in mobile screen. Please switch to Desktop screen.",
         {
           duration: 4000,
           style: {
