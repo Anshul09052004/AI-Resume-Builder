@@ -137,6 +137,30 @@ function ResumeBuilder() {
   // ✅ Download as PDF
   const downloadResume = () => {
     if (!resumeData) return;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      toast.error(
+        " Download not available on mobile! Please open this page on your desktop or laptop to download your resume.",
+        {
+          duration: 4000,
+          style: {
+            borderRadius: "12px",
+            background: "red",
+            color: "#fff",
+            fontSize: "15px",
+            fontWeight: "500",
+            padding: "16px 18px",
+            textAlign: "center",
+            width: "auto",
+            maxWidth: "320px",
+            margin: "auto",
+
+          },
+          icon: "⚠️",
+        }
+      );
+      return;
+    }
     const resumeElement = document.getElementById("resume-preview");
     if (!resumeElement) return;
 
@@ -173,7 +197,7 @@ function ResumeBuilder() {
     window.print();
     document.body.innerHTML = originalContents;
     window.location.reload();
-    
+
 
   };
 

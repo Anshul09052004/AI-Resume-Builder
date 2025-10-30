@@ -95,11 +95,9 @@ function Dashboard() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-14">
-         <h1
-  className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-green-600 via-green-600 to-yellow-500 bg-clip-text text-transparent tracking-tight mb-3 drop-shadow-sm"
->
-  Welcome, {user?.name}
-</h1>
+          <h1 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-green-600 via-green-600 to-yellow-500 bg-clip-text text-transparent tracking-tight mb-3 drop-shadow-sm">
+            Welcome, {user?.name}
+          </h1>
 
           <p className="text-gray-500 text-lg">
             Manage and craft your professional resumes beautifully.
@@ -138,9 +136,10 @@ function Dashboard() {
                 </div>
               </div>
 
+              {/* 🔹 Updated section for mobile fix */}
               <div
                 onClick={(e) => e.stopPropagation()}
-                className="flex justify-end gap-4 mt-3 opacity-0 group-hover:opacity-100 transition-all"
+                className="flex justify-end gap-4 mt-3 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all"
               >
                 <button
                   onClick={() => deleteResume(resume._id)}

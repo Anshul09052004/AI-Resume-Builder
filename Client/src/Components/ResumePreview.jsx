@@ -41,14 +41,16 @@ function ResumePreview({ data, template, accentColor, classes = "" }) {
 
   return (
     <div
-      className={`w-full flex justify-center items-start py-2 overflow-y-auto ${classes}`}
+      className={`w-full flex justify-center items-start py-2 ${classes}`}
       style={{ backgroundColor: "#f4f6f8" }}
     >
+
       <div
         id="resume-preview"
-        className="w-full max-w-[794px] h-[1123px] bg-white rounded-md border border-gray-300 
-                   shadow-sm flex flex-col gap-2 p-4 sm:p-5 
-                   transition-all duration-300 overflow-hidden print:h-auto"
+        className="w-full max-w-[794px] bg-white rounded-md border border-gray-300 
+             shadow-sm flex flex-col gap-2 p-4 sm:p-5 
+             transition-all duration-300 print:h-auto"
+
         style={{
           transform: "scale(0.88)",
           transformOrigin: "top center",
@@ -66,8 +68,8 @@ function ResumePreview({ data, template, accentColor, classes = "" }) {
           {renderTemplate()}
         </div>
 
-      
-       
+
+
       </div>
     </div>
   );

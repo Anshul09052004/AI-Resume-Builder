@@ -1,7 +1,8 @@
-import { FaRegUser, FaPhone, FaLinkedin, FaBriefcase } from "react-icons/fa";
+import { FaRegUser, FaLinkedin, FaBriefcase } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { IoLocationSharp } from "react-icons/io5";
 import { BsGlobe } from "react-icons/bs";
+import { FaPhone } from "react-icons/fa6";
 
 function PersonalInfoForm({ data, onChange, removeBackground, setRemoveBackground }) {
   const handleChange = (field, value) => {
